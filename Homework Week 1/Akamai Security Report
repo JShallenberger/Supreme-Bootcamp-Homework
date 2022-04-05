@@ -1,0 +1,34 @@
+Security 101 Homework: Cybersecurity Threat Landscape 
+Part 2: Akamai Security Year in Review 2020
+In this part, you should primarily use the Akamai Security Year in Review 2020 and Akamai State of the Internet/ Security along with independent research to answer the below questions.
+________________________________________
+1.	What was the most vulnerable and targeted element of the gaming industry between October 2019 to September 2020? 
+The players
+
+2.	From October 2019 to September 2020, which month did the financial services industry have the most daily web application attacks? 
+December 2019
+
+3.	What percentage of phishing kits monitored by Akamai were active for only 20 days or less? 
+More than 60%
+
+4.	What is credential stuffing? 
+This is a type of brute force attack. Stolen passwords from previous attacks are used to attempt to login.
+
+5.	Approximately how many of the gaming industry players have experienced their accounts being compromised?  How many of them are worried about it?
+More than half of frequent players have had their accounts compromised. 1/5 of gamers are worried about it.
+
+6.	What is a three-question quiz phishing attack?
+An attack that relies on users filling out a quiz in exchange for a “price”, but this often results in stolen personal information
+
+7.	Explain how Prolexic Routed defends organizations against DDoS attacks.
+Prolexic Routed redirects network traffic through Akamai scrubbing centers to only allow clean traffic to forward
+
+8.	What day between October 2019 to September 2020 had the highest Daily Logins associated with Daily Credential Abuse Attempts? 
+August 17, 2020
+
+9.	What day between October 2019 to September 2020 had the highest gaming attacks associated with Daily Web Application Attacks? 
+July 11, 2020
+
+10.	 What day between October 2019 to September 2020 had the highest media attacks associated with Daily Web Application Attacks?
+August 20, 2020
+
