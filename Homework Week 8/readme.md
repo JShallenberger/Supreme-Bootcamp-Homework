@@ -121,10 +121,19 @@ root@UbuntuDesktop:/home/sysadmin# nslookup 98.137.246.8
 ```
   - The domain of the redirected IP belongs to yahoo.com.
   - The DNS runs on the Application Layer.
+ 
 
  ### Phase 4:  _"Sh`ARP` Dressed Man"_
+  **HTTP findings**
   - Found file left by hacker and ran through wireshark
-  
+  - Ran HTTP filter 
+  - See message from hacker in attached immage
+  ![screenshot of http filter](secretlogs1.png)
+  - HTPP runs on the Application Layer.
 
 
-  - This runs on the Data-Link Layer.
+  **ARP findings**
+  - Ran ARP filter
+  - Found duplicate IP address in the ARP responses. See attached image.
+  ![screenshot of arp filter](secretlogs2.png)
+  - ARP runs on the Data-Link Layer.
