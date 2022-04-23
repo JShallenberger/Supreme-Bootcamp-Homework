@@ -8,7 +8,7 @@ The concept of defense in depth can be broken down into three different security
 
 1. Walls, bollards, fences, guard dogs, cameras, and lighting are what type of security control?
 
-    Answer:
+    Answer: Preventative
 
 2. Security awareness programs, BYOD policies, and ethical hiring practices are what type of security control?
 
