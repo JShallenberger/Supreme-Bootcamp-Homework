@@ -12,39 +12,39 @@ The concept of defense in depth can be broken down into three different security
 
 2. Security awareness programs, BYOD policies, and ethical hiring practices are what type of security control?
 
-    Answer:
+    Answer: Administrative
 
 3. Encryption, biometric fingerprint readers, firewalls, endpoint security, and intrusion detection systems are what type of security control?
 
-    Answer:
+    Answer: Technical
 
 #### Intrusion Detection and Attack indicators
 
 1. What's the difference between an IDS and an IPS?
 
-    Answer:
+    Answer: IDS is a monitoring system and IPS is a control system
 
 2. What's the difference between an Indicator of Attack and an Indicator of Compromise?
 
-   Answer:
+   Answer: IOA is detecting an attack in real time and IOC shows the intrusion after it happened
 
 #### The Cyber Kill Chain
 
 Name each of the seven stages for the Cyber Kill chain and provide a brief example of each.
 
-1. Stage 1:
+1. Stage 1: Reconnaissance: Gathering information about a target. Email addresses, IT systems, organizational structure, vulnerabilities, etc.
 
-2. Stage 2:
+2. Stage 2: Weaponization: Attacker will engineer malware for their needs and exploit vulnerabilities.
 
-3. Stage 3:
+3. Stage 3: Delivery: Deploying the weaponized attack. 
 
-4. Stage 4:
+4. Stage 4: Exploitation: Exploiting a vulnerability on the victim’s system
 
-5. Stage 5:
+5. Stage 5: Installation: The install of malware
 
-6. Stage 6:
+6. Stage 6: Command and Control: Called C2. Attackers use their C2 to remotely access their targets.
 
-7. Stage 7:
+7. Stage 7: Actions on Objectives: This is the final goal of an attacker.
 
 
 #### Snort Rule Analysis
@@ -59,15 +59,15 @@ alert tcp $EXTERNAL_NET any -> $HOME_NET 5800:5820 (msg:"ET SCAN Potential VNC S
 
 1. Break down the Sort Rule header and explain what is happening.
 
-   Answer:
+   Answer: Generates TCP alerts for inbound traffic on ports 5800 to 5820 on the external network
 
 2. What stage of the Cyber Kill Chain does this alert violate?
 
-   Answer:
+   Answer: Reconnaissance
 
 3. What kind of attack is indicated?
 
-   Answer:
+   Answer: Emerging threat on ports 5800 to 5820
 
 Snort Rule #2
 
@@ -77,21 +77,21 @@ alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any (msg:"ET POLICY PE EXE or D
 
 1. Break down the Sort Rule header and explain what is happening.
 
-   Answer:
+   Answer: Generates a TCP alert for inbound traffic outside the external network on port 80 to all ports.
 
 2. What layer of the Defense in Depth model does this alert violate?
 
-   Answer:
+   Answer: Policy
 
 3. What kind of attack is indicated?
 
-   Answer:
+   Answer: Emerging threat for EXE or DLL file download violation
 
 Snort Rule #3
 
 - Your turn! Write a Snort rule that alerts when traffic is detected inbound on port 4444 to the local network on any port. Be sure to include the `msg` in the Rule Option.
 
-    Answer:
+    Answer: alert tcp $EXTERNAL_NET 4444 -> $HOME_NET any (msg: "ET Possible Breach”)
 
 ### Part 2: "Drop Zone" Lab
 
@@ -109,7 +109,7 @@ Before getting started, you should verify that you do not have any instances of 
 - Run the command that removes any running instance of `ufw`.
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo apt remove ufw
     ```
 
 #### Enable and start `firewalld`
@@ -119,8 +119,8 @@ By default, these service should be running. If not, then run the following comm
 - Run the commands that enable and start `firewalld` upon boots and reboots.
 
     ```bash
-    $ <ADD COMMAND TO enable firewalld HERE>
-    $ <ADD COMMAND TO  start firewalld HERE>
+    $ sudo systemctl enable firewalld
+    $ sudo systemctl start firewalld
     ```
 
   Note: This will ensure that `firewalld` remains active after each reboot.
@@ -130,7 +130,7 @@ By default, these service should be running. If not, then run the following comm
 - Run the command that checks whether or not the `firewalld` service is up and running.
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo systemctl status firewalld
     ```
 
 
@@ -141,7 +141,7 @@ Next, lists all currently configured firewall rules. This will give you a good i
 - Run the command that lists all currently configured firewall rules:
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd –list-all-zones
     ```
 
 - Take note of what Zones and settings are configured. You many need to remove unneeded services and settings.
@@ -151,7 +151,7 @@ Next, lists all currently configured firewall rules. This will give you a good i
 - Run the command that lists all currently supported services to see if the service you need is available
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd –get -services
     ```
 
 - We can see that the `Home` and `Drop` Zones are created by default.
@@ -162,7 +162,7 @@ Next, lists all currently configured firewall rules. This will give you a good i
 - Run the command that lists all currently configured zones.
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd –get-zones
     ```
 
 - We can see that the `Public` and `Drop` Zones are created by default. Therefore, we will need to create Zones for `Web`, `Sales`, and `Mail`.
@@ -172,9 +172,9 @@ Next, lists all currently configured firewall rules. This will give you a good i
 - Run the commands that creates Web, Sales and Mail zones.
 
     ```bash
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --permanent --new-zone=web
+    $ sudo firewall-cmd --permanent --new-zone=sales
+    $ sudo firewall-cmd --permanent --new-zone=mail
     ```
 
 #### Set the zones to their designated interfaces:
@@ -182,10 +182,10 @@ Next, lists all currently configured firewall rules. This will give you a good i
 - Run the commands that sets your `eth` interfaces to your zones.
 
     ```bash
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=public --change-interface=eth0
+    $ sudo firewall-cmd --zone=web --change-interface=eth1
+    $ sudo firewall-cmd --zone=sales --change-interface=eth2
+    $ sudo firewall-cmd --zone=mail --change-interface=eth3
     ```
 
 #### Add services to the active zones:
@@ -195,29 +195,29 @@ Next, lists all currently configured firewall rules. This will give you a good i
 - Public:
 
     ```bash
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=public --add-service=http
+    $ sudo firewall-cmd --zone=public --add-service=https
+    $ sudo firewall-cmd --zone=public --add-service=pop3
+    $ sudo firewall-cmd --zone=public --add-service=smtp
     ```
 
 - Web:
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=web --add-service=http
     ```
 
 - Sales
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=sales --add-service=https
     ```
 
 - Mail
 
     ```bash
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=mail --add-service=smtp
+    $ sudo firewall-cmd --zone=mail --add-service=pop3
     ```
 
 - What is the status of `http`, `https`, `smtp` and `pop3`?
@@ -227,9 +227,9 @@ Next, lists all currently configured firewall rules. This will give you a good i
 - Run the command that will add all current and any future blacklisted IPs to the Drop Zone.
 
      ```bash
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=drop --add-source=10.208.56.23
+    $ sudo firewall-cmd --zone=drop --add-source=135.95.103.76
+    $ sudo firewall-cmd --zone=drop --add-source=76.34.169.118
     ```
 
 #### Make rules permanent then reload them:
@@ -239,7 +239,7 @@ It's good practice to ensure that your `firewalld` installation remains nailed u
 - Run the command that reloads the `firewalld` configurations and writes it to memory
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --runtime-to-permanent
     ```
 
 #### View active Zones
@@ -249,7 +249,7 @@ Now, we'll want to provide truncated listings of all currently **active** zones.
 - Run the command that displays all zone services.
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd –get-active-zones
     ```
 
 
@@ -258,7 +258,7 @@ Now, we'll want to provide truncated listings of all currently **active** zones.
 - Use a rich-rule that blocks the IP address `138.138.0.3`.
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="138.138.0.3" reject
     ```
 
 #### Block Ping/ICMP Requests
@@ -268,7 +268,7 @@ Harden your network against `ping` scans by blocking `icmp ehco` replies.
 - Run the command that blocks `pings` and `icmp` requests in your `public` zone.
 
     ```bash
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=public --add-icmp-block=echo-reply --add-icmp-block=echo-request
     ```
 
 #### Rule Check
@@ -278,11 +278,11 @@ Now that you've set up your brand new `firewalld` installation, it's time to ver
 - Run the command that lists all  of the rule settings. Do one command at a time for each zone.
 
     ```bash
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
-    $ <ADD COMMAND HERE>
+    $ sudo firewall-cmd --zone=public --list-all
+    $ sudo firewall-cmd --zone=sales --list-all
+    $ sudo firewall-cmd --zone=mail --list-all
+    $ sudo firewall-cmd --zone=web --list-all>
+    $ sudo firewall-cmd --permanent --zone=drop --list-all
     ```
 
 - Are all of our rules in place? If not, then go back and make the necessary modifications before checking again.
@@ -300,21 +300,21 @@ Now, we will work on another lab. Before you start, complete the following revie
 
 1. Name and define two ways an IDS connects to a network.
 
-   Answer 1:
+   Answer 1: Network tap. Transmits both inbound and outbound traffic on separate channels.
 
-   Answer 2:
+   Answer 2: SPAN. Mirrors all network traffic to another port.
 
 2. Describe how an IPS connects to a network.
 
-   Answer:
+   Answer: The IPS is installed inline, actively evaluating and automating all traffic flows that enter the network.
 
 3. What type of IDS compares patterns of traffic to predefined signatures and is unable to detect Zero-Day attacks?
 
-   Answer:
+   Answer: Signature based IDS. 
 
 4. Which type of IDS is beneficial for detecting all suspicious traffic that deviates from the well-known baseline and is excellent at detecting when an attacker probes or sweeps a network?
 
-   Answer:
+   Answer: Anomaly based IDS. 
 
 #### Defense in Depth
 
@@ -322,131 +322,69 @@ Now, we will work on another lab. Before you start, complete the following revie
 
     1.  A criminal hacker tailgates an employee through an exterior door into a secured facility, explaining that they forgot their badge at home.
 
-        Answer:
+        Answer: Physical.
 
     2. A zero-day goes undetected by antivirus software.
 
-        Answer:
+        Answer: Application.
 
     3. A criminal successfully gains access to HR’s database.
 
-        Answer:
+        Answer: Data.
 
     4. A criminal hacker exploits a vulnerability within an operating system.
 
-        Answer:
+        Answer: Host.
 
     5. A hacktivist organization successfully performs a DDoS attack, taking down a government website.
 
-        Answer:
+        Answer: Network.
 
     6. Data is classified at the wrong classification level.
 
-        Answer:
+        Answer: Policy and procedures.
 
     7. A state sponsored hacker group successfully firewalked an organization to produce a list of active services on an email server.
 
-        Answer:
+        Answer: Perimeter. 
 
 2. Name one method of protecting data-at-rest from being readable on hard drive.
 
-    Answer:
+    Answer: Encryption.
 
 3. Name one method to protect data-in-transit.
 
-    Answer:
+    Answer: VPN.
 
 4. What technology could provide law enforcement with the ability to track and recover a stolen laptop.
 
-   Answer:
+   Answer: GPS trackers.
 
 5. How could you prevent an attacker from booting a stolen laptop using an external hard drive?
 
-    Answer:
+    Answer: Firmware password.
 
 
 #### Firewall Architectures and Methodologies
 
 1. Which type of firewall verifies the three-way TCP handshake? TCP handshake checks are designed to ensure that session packets are from legitimate sources.
 
-  Answer:
+  Answer: Circuit level gateway firewall.
 
 2. Which type of firewall considers the connection as a whole? Meaning, instead of looking at only individual packets, these firewalls look at whole streams of packets at one time.
 
-  Answer:
+  Answer: Stateful firewall.
 
 3. Which type of firewall intercepts all traffic prior to being forwarded to its final destination. In a sense, these firewalls act on behalf of the recipient by ensuring the traffic is safe prior to forwarding it?
 
-  Answer:
+  Answer: Application firewall.
 
 
 4. Which type of firewall examines data within a packet as it progresses through a network interface by examining source and destination IP address, port number, and packet type- all without opening the packet to inspect its contents?
 
-  Answer:
+  Answer: Stateless firewall.
 
 
 5. Which type of firewall filters based solely on source and destination MAC address?
 
-  Answer:
-
-
-
-### Bonus Lab: "Green Eggs & SPAM"
-In this activity, you will target spam, uncover its whereabouts, and attempt to discover the intent of the attacker.
- 
-- You will assume the role of a Jr. Security administrator working for the Department of Technology for the State of California.
- 
-- As a junior administrator, your primary role is to perform the initial triage of alert data: the initial investigation and analysis followed by an escalation of high priority alerts to senior incident handlers for further review.
- 
-- You will work as part of a Computer and Incident Response Team (CIRT), responsible for compiling **Threat Intelligence** as part of your incident report.
-
-#### Threat Intelligence Card
-
-**Note**: Log into the Security Onion VM and use the following **Indicator of Attack** to complete this portion of the homework. 
-
-Locate the following Indicator of Attack in Sguil based off of the following:
-
-- **Source IP/Port**: `188.124.9.56:80`
-- **Destination Address/Port**: `192.168.3.35:1035`
-- **Event Message**: `ET TROJAN JS/Nemucod.M.gen downloading EXE payload`
-
-Answer the following:
-
-1. What was the indicator of an attack?
-   - Hint: What do the details of the reveal? 
-
-    Answer: 
-
-
-2. What was the adversarial motivation (purpose of attack)?
-
-    Answer: 
-
-3. Describe observations and indicators that may be related to the perpetrators of the intrusion. Categorize your insights according to the appropriate stage of the cyber kill chain, as structured in the following table.
-
-| TTP | Example | Findings |
-| --- | --- | --- | 
-| **Reconnaissance** |  How did they attacker locate the victim? | 
-| **Weaponization** |  What was it that was downloaded?|
-| **Delivery** |    How was it downloaded?|
-| **Exploitation** |  What does the exploit do?|
-| **Installation** | How is the exploit installed?|
-| **Command & Control (C2)** | How does the attacker gain control of the remote machine?|
-| **Actions on Objectives** | What does the software that the attacker sent do to complete it's tasks?|
-
-
-    Answer: 
-
-
-4. What are your recommended mitigation strategies?
-
-
-    Answer: 
-
-
-5. List your third-party references.
-
-    Answer: 
-
-
----
+  Answer: MAC layer filtering firewall.
