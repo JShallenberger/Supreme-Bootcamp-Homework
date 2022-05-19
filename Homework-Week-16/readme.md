@@ -60,16 +60,24 @@ Your client has asked that you help identify any vulnerabilities with their file
  
 - Bonus command to output results into a new text file named `zenmapscan.txt`:
 
-  
+  * `nmap -sV -oN zenmapscan.txt 192.168.0.10`
 
 - Zenmap vulnerability script command: 
+
+  * `nmap --script ftp-vsftpd-backdoor,smb-enum-shares 192.168.0.10
 
 - Once you have identified this vulnerability, answer the following questions for your client:
   1. What is the vulnerability:
 
+  * READ/WRITE access to Samba.
+
   2. Why is it dangerous:
 
+  * Anyone can read or write to the vulnerable files.
+
   3. What mitigation strategies can you recommendations for the client to protect their server:
+
+  * Update Samba,
 
 ---
 © 2020 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.  
