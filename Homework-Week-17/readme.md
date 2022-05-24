@@ -18,7 +18,9 @@ Machine IP: 192.168.0.20
 Hostname: MSEDGEWIN10
 
 Vulnerability Exploited: Icecast_header
-``` exploit/windows/http/icecast_header ```
+``` 
+exploit/windows/http/icecast_header 
+```
 
 Vulnerability Explanation:
 This exploit is a buffer overflow in the header parsing of Icecast 2.0.1 and earlier. Allows for an exploit in which an attack can remotely gain control of a victim's system by overwriting the memory on the sytem utilizing the Icecast flaw. This flaw writes past the enf of a pointer array when receiving 32 HTTP headers.
@@ -28,12 +30,15 @@ The severity of this exploit is ranked high severity due to the fact that is tak
 
 Proof of Concept:
 The first step was to run a nmap scan that looked for services, service versions and open ports. These were the results of that scan. 
+
 ![nmap](images/nmap.png)
  
 After determining there was an outdated version of Icecast, ran the Icecast exploit to gain shell access.
-![shell](imapges/shell.png)
+
+![shell](images/shell.png)
  
 Lastly, located on the vulnerable machine was a document containing a secret recipe for a drink. Easy IP theft.
+
  ![drinks](images/drinks_recipe.png)
  
 Recommendations
