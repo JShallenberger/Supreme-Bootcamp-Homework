@@ -4,7 +4,7 @@
 
 Deliverable:
 
-![injection1](images/injection1) 
+![injection1](images/injection1.png) 
  
 Best way to prevent a command injection is to avoid system calls and user input. A strong input validation will need to be performed, validating against a whitelist of pre-approved inputs and use only secure APIs.
 
@@ -13,7 +13,7 @@ Best way to prevent a command injection is to avoid system calls and user input.
 
 Deliverable: 
 
-![brute_force1](images/brute_force1)
+![brute_force1](images/brute_force1.png)
  
 One method to mitigate against a brute force attack is to set a number of incorrect logins attempts and have to account locked out. You can also prevent login attempts from known and unknown browsers and devices by using device cookies as an authenticator.
 
@@ -22,7 +22,7 @@ One method to mitigate against a brute force attack is to set a number of incorr
 
 Deliverable:
 
-![beef1](images/beef1)
+![beef1](images/beef1.png)
  
 Web Application firewalls can used to detect a XSS attack in real time. Another way is to implement a content security policy into the web browser. 
 
