@@ -40,6 +40,8 @@ The Red Team was able to penetrate Target 1 and retrieve the following confident
 
 **flag1.txt:** {b9bbcb33e11b80be759c4e844862482d}
 
+	![](Images/flag-1.png)
+
 
 - Exploit Used:
 - WPScan to enumerate users on the Target1 WordPress site.
@@ -47,7 +49,6 @@ The Red Team was able to penetrate Target 1 and retrieve the following confident
 	$ wpscan --url 192.168.1.110/wordpress
 	$ wpscan --url 192.168.1.110 --enumerate -u
 		
-	![](IMAGES/wpscan.png)
 
 
 - Targeting the user michael
