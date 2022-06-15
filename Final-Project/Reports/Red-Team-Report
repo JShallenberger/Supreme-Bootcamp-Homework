@@ -69,8 +69,6 @@ The Red Team was able to penetrate Target 1 and retrieve the following confident
 		- ls -l
 		- nano services.html
 			
-![](IMAGES/flag1.png)
-			
             	
 
 
@@ -89,7 +87,7 @@ Exploit Used
 		- ls -l
 		- cat flag2.txt
 		
-![](IMAGES/flag2.png)
+![](Images/flag-2.png)
 
 **flag3.txt:** {afc01ab56b50591e7dccf93122770cd23}
 
@@ -103,7 +101,7 @@ Exploit Used:
 	- use wordpress;
 	- select * from wp_posts;
 		
-![](IMAGES/flag3.png)
+![](Images/flag-3.png)
 
 **flag4.txt:** {715dea6c055b9fe3337544932F2941ce}
 
@@ -123,7 +121,7 @@ Exploit Used:
 - Command:
 		- john wp_hashes.txt
 		
-![](IMAGES/steven-password-2.png)
+![](Images/steven-login.png)
         
 
 - Once the user Steven's password hash was crached, the next step was to SSH in the server as Steven. Under the user Steven, privileges will first be checked, and escalated to root by guessing common root passwords.
@@ -136,4 +134,4 @@ Exploit Used:
 		- find /-iname flag*
 		- cat /root/flag4.txt
 		
-![](IMAGES/flag4.png)
+![](Images/flag-4.png)
